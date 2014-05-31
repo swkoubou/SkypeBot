@@ -22,7 +22,7 @@ def skype_handler(msg, event):
         if msg.Body == u"プロ":
             msg.Chat.SendMessage(u"趣味")
         elif msg.Body[0:2] == u":g":
-            msg.Chat.SendMessage("requesting...")
+            cm = msg.Chat.SendMessage("requesting...")
             out1 = Output()
             out2 = Output()
             try:
@@ -40,9 +40,9 @@ def skype_handler(msg, event):
                 sys.stdout = sys.__stdout__
                 sys.stderr = sys.__stderr__
                 if not out1.isEmpty():
-                    msg.Chat.SendMessage(out1.buffer);
+                    cm.Body += out1.buffer;
                 if not out2.isEmpty():
-                    msg.Chat.SendMessage(out2.buffer);
+                    cm.Body += out2.buffer;
  
 def main(): 
     global gaw
