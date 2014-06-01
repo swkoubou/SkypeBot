@@ -39,6 +39,7 @@ def skype_handler(msg, event):
             finally:
                 sys.stdout = sys.__stdout__
                 sys.stderr = sys.__stderr__
+                cm.Body += "\n"
                 if not out1.isEmpty():
                     cm.Body += out1.buffer;
                 if not out2.isEmpty():
