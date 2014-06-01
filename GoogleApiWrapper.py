@@ -78,10 +78,18 @@ class GoogleApiWrapper:
             events = service.events().list(
                 calendarId=calendar['id'],
                 singleEvents=True,
-                timeMin=timeMin
+                timeMin=timeMin,
+                timeZone=self._timezone.zone
             ).execute()
             for event in events['items']:
-                res.append('%s %s' % (event['start'][event['start'].keys()[0]], event['summary']))
+                start = ""
+
+                if 'date' in event['start']:
+                    start = event['start']['date'] + ' ' * 17
+                elif 'dateTime' in event['start']:
+                    start = event['start']['dateTime'][:-6]
+
+                res.append('%s [%s]' % (start, event['summary']))
     
         res.sort()
         return res
