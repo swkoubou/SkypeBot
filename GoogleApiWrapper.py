@@ -56,10 +56,11 @@ class GoogleApiWrapper:
         elif 'calendar_insert' in ag:
             data_type = 'dateTime' if ag.date_time else 'date'
             event = {
-                'start': {data_type: ag.start + "+09:00"},
-                'end': {data_type: ag.end + "+09:00"},
+                'start': {data_type: ag.start + ("+09:00" if ag.date_time else "")},
+                'end': {data_type: ag.end + ("+09:00" if ag.date_time else "")},
                 'summary': ag.summary
             }
+
             try:
                 self.SetCalendarEvent(event)
             except:
